@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume</title>
+    <link rel = "stylesheet" href = "style.css">
 </head>
 <body>
     <nav>
@@ -12,7 +13,7 @@
             <li><a href = "projects/index.html">Projects</a></li>
             <li><a href = "contact/index.html">Contact</a></li>
             <li><a href = "https://github.com/pelicheng" target = "_blank">GitHub</a></li>
-            <li><a href = "resume.html">Resume</a></li>
+            <li><a href = "resume.html" class = "current">Resume</a></li>
         </ul>
     </nav>
 
@@ -20,54 +21,78 @@
         <h1>Peiling Cheng</h1>
     </header>
 
-    <section>
-        <header>
-            <h2>Education</h2>
-        </header>
-        <ul>
-            <li>
-                <h3>University of California, San Diego - Data Science</h3>
-                <time datetime = "2027-06-15">Expected Graduation: June 2027</time>
-            </li>
-            <li>
-                <h3>Arroyo High School</h3>
-                <time datetime = "2023-06-15">Graduated: June 2023</time>
-            </li>
-        </ul>
-    </section>
-    <section>
-        <header>
-            <h2>Experience</h2>
-        </header>
-        <ul>
-            <li>
-                <article>
-                    <header>
-                        <h3>The Optometry Center Intern</h3>
-                        <time datetime = "2022-06-20">June 2022 - July 2022</time>
-                    </header>
-                    <p>Assisted with disinfecting and organizing glasses, sorting through contacts, contacting clients regarding order arrival, and in charge of data entry.</p>
-                </article>
-            </li>
-            <li>
-                <article>
-                    <header>
-                        <h3>JuniorCoach Tutor Volunteer</h3>
-                        <time datetime = "2020-10-01">October 2020 - September 2021</time>
-                    </header>
-                    <p>Taught math, Chinese, and drawing to children.</p>
-                </article>
-            </li>
-        </ul>
-    </section>
-    <section>
-        <header>
-            <h2>Skills</h2>
-        </header>
-        <ul>
-            <li>Programming Languages: Python, Java, HTML, CSS</li>
-            <li>Soft Skills: Time Management, Adaptability, Attention to Detail, Patience</li>
-        </ul>
-    </section>
+    <div class = 'resume'>
+        <section class = "left">
+            <header>
+                <h2>Contacts</h2>
+            </header>
+            <p><strong>Email: </strong></p>
+            <p class = "center">placeholder</p>
+            <p><strong>Phone: </strong></p>
+            <p class = "center">placeholder</p>
+        </section>
+        <section class = "right">
+            <header>
+                <h2>Education</h2>
+            </header>
+            <ul>
+                <li>
+                    <h3>University of California, San Diego (<time datetime = "2027-06-15">June 2027</time>)</h3>
+                    <p><strong>Major:</strong> Data Science</p>
+                    <p><strong>Minor:</strong> Cognitive Science</p>
+                </li>
+                <li>
+                    <h3>Arroyo High School (<time datetime = "2023-06-15">June 2023</time>)</h3>
+                </li>
+            </ul>
+        </section>
+        <section class = "left">
+            <header>
+                <h2>Skills</h2>
+            </header>
+                <p><strong>Programming Languages:</strong></p>
+                <p>Python</p>
+                <p>Java</p>
+                <p>HTML</p>
+                <p>CSS</p>
+                <p><strong>Soft Skills:</strong></p>
+                <p>Time Management</p>
+                <p>Adaptability</p>
+                <p>Attention to Detail</p> 
+                <p>Patience</p>
+        </section>
+        <section class = "right">
+            <header>
+                <h2>Experience</h2>
+            </header>
+            <ul>
+                <li>
+                    <article>
+                        <header>
+                            <h3>The Optometry Center Intern (<time datetime = "2022-06-20">June 2022 - July 2022</time>)</h3>
+                        </header>
+                        <p>Assisted with disinfecting and organizing glasses, sorting through contacts, contacting clients regarding order arrival, and in charge of data entry.</p>
+                    </article>
+                </li>
+                <li>
+                    <article>
+                        <header>
+                            <h3>JuniorCoach Tutor Volunteer (<time datetime = "2020-10-01">October 2020 - September 2021</time>)</h3>
+                        </header>
+                        <p>Taught math, Chinese, and drawing to children.</p>
+                    </article>
+                </li>
+                <li>
+                    <article>
+                        <header>
+                            <h3>Chinese Union Project Management Member (<time datetime = "2023-10-01">October 2023 - Current</time>)</h3>
+                        </header>
+                        <p>Help write event plans and carry out the event.</p>
+                    </article>
+                </li>
+            </ul>
+        </section>
+        
+    </div>
 </body>
 </html>
