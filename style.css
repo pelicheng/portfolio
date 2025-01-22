@@ -1,6 +1,7 @@
 /* @import url("colors.css"); */
 :root {
     --color-accent: oklch(83.79% 0.0518 234.93);
+    color-scheme: light dark;
 }
 
 body {
@@ -29,7 +30,8 @@ nav {
     margin-bottom: 2em;
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-bottom-color: oklch(80% 3% 200);
+    --border-color: oklch(50% 10% 200 / 40%);
+    border-bottom-color: var(--border-color)
 }
 
 nav ul{
@@ -60,7 +62,7 @@ nav a:hover {
     border-bottom-color: var(--color-accent);
     border-bottom-style: solid;
     padding-bottom: 0.1em;
-    background-color: oklch(from var(--color-accent) 95% 5% h);
+    background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
 }
 
 form {
@@ -69,7 +71,7 @@ form {
     gap: 1em;
 }
 
-input, textarea, button {
+input, textarea, button, select {
     font: inherit;
 }
 
@@ -105,13 +107,15 @@ h2 {
 }
 
 .left {
-    background-color: #ebf0f4;
+    /* background-color: #ebf0f4; */
+    background-color: color-mix(in oklch, #ebf0f4, canvas 50%);
     padding: 1em;
     /* border-radius: 8px; */
 }
 
 .right {
-    background-color: #e4e9ed;
+    /* background-color: #e4e9ed; */
+    background-color: color-mix(in oklch, #e4e9ed, canvas 35%);
     padding: 1em;
 }
 
@@ -124,4 +128,11 @@ h2 {
 
 .resume .center {
     text-align: center;
+}
+
+.color-scheme {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.8rem;
 }

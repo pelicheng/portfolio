@@ -48,3 +48,53 @@ for (let p of pages) {
 
     nav.append(a); 
 }
+
+document.body.insertAdjacentHTML(
+    'afterbegin',
+    `
+      <label class="color-scheme">
+          Theme:
+          <select>
+              <option value = "light dark">Automatic</option>
+              <option value = "light">Light</option>
+              <option value = "dark">Dark</option>
+          </select>
+      </label>`
+);
+
+let select = document.querySelector('select');
+
+function setColorScheme(colorScheme) {
+    document.documentElement.style.setProperty('color-scheme', colorScheme);
+}
+
+select.addEventListener('input', function (event) {
+    console.log('color scheme changed to', event.target.value);
+    localStorage.colorScheme = event.target.value;
+    setColorScheme(event.target.value);
+});
+
+if ('colorScheme' in localStorage) {
+    let savedScheme = localStorage.colorScheme;
+    setColorScheme(savedScheme);
+    select.value = savedScheme;
+}
+
+let form = document.querySelector('form');
+
+form?.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    let data = new FormData(form);
+    let url = form.action + '?';
+
+    for (let [name, value] of data) {
+        console.log(name, value);
+        value = encodeURIComponent(value);
+        url += `${name}=${value}&`;
+        
+    }
+    
+    url = url.slice(0, -1);
+    location.href = url;
+});
