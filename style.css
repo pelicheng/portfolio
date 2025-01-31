@@ -136,3 +136,16 @@ h2 {
     right: 1rem;
     font-size: 0.8rem;
 }
+
+#profile-stats dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+#profile-stats dt {
+    grid-row: 1;
+}
+
+#profile-stats dd {
+    grid-row: 2;
+}

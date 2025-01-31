@@ -98,3 +98,50 @@ form?.addEventListener('submit', function(event) {
     url = url.slice(0, -1);
     location.href = url;
 });
+
+export async function fetchJSON(url) {
+    try {
+        // Fetch the JSON file from the given URL
+        const response = await fetch(url);
+
+        console.log(response);
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch projects: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        console.log(data);
+
+        return data;
+
+    } catch (error) {
+        console.error('Error fetching or parsing JSON data:', error);
+    }
+}
+
+// fetchJSON('../lib/projects.json');
+
+export function renderProjects(project, containerElement, headingLevel = 'h2') {
+    // Your code will go here
+    containerElement.innerHTML = '';
+
+    project.forEach(project => {
+        const article = document.createElement('article');
+
+        article.innerHTML = `
+        <h3>${project.title}</h3>
+        <h3>${project.year}</h3>
+        <img src="${project.image}" alt="${project.title}">
+        <p>${project.description}</p>
+        `;
+
+        containerElement.appendChild(article);
+    });
+}
+
+export async function fetchGitHubData(username) {
+    // return statement here
+    return fetchJSON(`https://api.github.com/users/${username}`);
+  }
