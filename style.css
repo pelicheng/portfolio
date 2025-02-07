@@ -149,3 +149,71 @@ h2 {
 #profile-stats dd {
     grid-row: 2;
 }
+
+.project-year {
+    color: gray;
+    font-variant-numeric: oldstyle-nums;
+    font-family: 'Baskerville';
+}
+
+#projects-pie-plot {
+    max-width: 20em;
+    margin-block: 2em;
+    /* Do not clip shapes outside the viewBox */
+    overflow: visible;
+    max-width: 50%;
+}
+
+.legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+    gap: 1em;
+    margin-top: 20px;
+    padding: 2px;
+    border: 2px double rgb(136, 168, 189);
+    border-radius: 8px;
+    flex: 1;
+    max-width: 50%;
+}
+
+.legend li {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px;
+}
+
+.legend li .swatch {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: var(--color);
+    border-radius: 50%;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+svg:has(path:hover) {
+    path:not(:hover) {
+      opacity: 50%;
+    }
+}
+
+path {
+    transition: 300ms;
+    cursor: pointer;
+}
+
+.selected {
+    /* --color: oklch(60% 45% 0) !important; */
+    --color: oklch(27.76% 0.1677 269.34) !important;
+    
+    &:is(path) {
+      fill: var(--color);
+    }
+}
