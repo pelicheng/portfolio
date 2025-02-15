@@ -270,7 +270,7 @@ dl.info dt {
     position: fixed;
     top: 1em;
     left: 1em;
-    background-color: rgba(255, 255, 255, 0.8); /*change later*/
+    background-color:color-mix(in oklch, var(--color-accent), canvas 50%); /*change later*/
     box-shadow: inset; /*change later*/
     border-radius: 8px;
     backdrop-filter: blur(3px);
