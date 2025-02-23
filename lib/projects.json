@@ -16,7 +16,7 @@
     {
         "title": "Lab 7: Geospatial Visualizations",
         "year": 2025,
-        "image": "https://github.com/pelicheng/portfolio/blob/main/images/Lab07.jpeg?raw=true",
+        "image": "https://raw.githubusercontent.com/pelicheng/portfolio/main/images/Lab07.jpeg",
         "url": "https://pelicheng.github.io/two-tired/",
         "description": "This is an interactive map visualization of bike traffic in Boston and Cambridge at different times of the day."
     },
