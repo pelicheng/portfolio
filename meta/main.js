@@ -217,7 +217,7 @@ function createScatterplot() {
     if (!brushSelection) {
         return false;
     }
-    // TODO: return true if commit is within brushSelection
+    // return true if commit is within brushSelection
     // and false if not
     const min = { x: brushSelection[0][0], y: brushSelection[0][1] };
     const max = { x: brushSelection[1][0], y: brushSelection[1][1] };
