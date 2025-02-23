@@ -164,6 +164,10 @@ h2 {
     max-width: 50%;
 }
 
+.projects img {
+    width: 100%;
+}
+
 .legend {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));

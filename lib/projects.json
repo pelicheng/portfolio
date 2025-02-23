@@ -3,72 +3,84 @@
         "title": "MVRDV Valley Portfolio",
         "year": 2024,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "url": "#",
         "description": "Iste quasi maxime, odit libero vitae quos nulla totam neque molestias consequuntur architecto numquam at nobis blanditiis nisi cumque ex possimus, molestiae voluptatibus iure ab enim laboriosam, exercitationem voluptates. Magnam."
     },
     {
         "title": "Recipe Rating Analysis",
         "year": 2024,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "url": "#",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur corporis nulla tempora magni sed maxime. Rerum tempore minima vel sed optio ipsam, odio sequi corrupti sapiente natus, delectus porro consequatur."
     },
     {
-        "title": "Lab 0: Setup",
+        "title": "Lab 7: Geospatial Visualizations",
         "year": 2025,
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Vero, voluptates quae atque voluptate cumque expedita temporibus at magnam incidunt voluptatibus dolorem minima explicabo nesciunt non iste accusantium perferendis necessitatibus vitae facilis porro facere. Officiis rerum aspernatur sint ab."
+        "image": "../images/Lab07.jpeg",
+        "url": "https://pelicheng.github.io/two-tired/",
+        "description": "This is an interactive map visualization of bike traffic in Boston and Cambridge at different times of the day."
     },
     {
         "title": "Lab 1: Introduction to the Web Platform",
         "year": 2025,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "url": "#",
         "description": "Possimus, voluptate recusandae odit vel libero veritatis, nihil nemo sed assumenda obcaecati illum repellendus quae eveniet eligendi, architecto voluptas iure necessitatibus ea sapiente laborum debitis velit voluptates? Nobis, possimus corporis."
     },
     {
         "title": "Lab 2: Styling with CSS",
         "year": 2025,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "url": "#",
         "description": "Laboriosam magnam officia sint ut assumenda officiis natus odio excepturi sunt iure minima repellat voluptatem saepe enim a ex reprehenderit obcaecati soluta, sed magni fugit tempore labore quibusdam! Error, ad!"
     },
     {
         "title": "Lab 3: Introduction to JS",
         "year": 2025,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "url": "#",
         "description": "Commodi, ut facilis. Sint quos adipisci nemo quod dignissimos natus. Dolor cumque ducimus sed delectus quam, et ad, harum a vitae vel beatae nesciunt esse corrupti illum rerum ut quae?"
     },
     {
         "title": "Lab 4: JavaScript II",
         "year": 2025,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "url": "#",
         "description": "Repellat animi, ab eveniet nihil neque enim impedit mollitia molestiae eius tempora libero ex veniam asperiores vero nobis delectus quos eos illum provident id. Odio commodi minima fugit sequi quaerat."
     },
     {
         "title": "Project 1: Expository Visualization",
         "year": 2025,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "url": "#",
         "description": "Doloremque modi quas ut iste similique, alias unde ea nesciunt maxime ipsa minus magni sit, quod porro repudiandae consequuntur. Quibusdam pariatur animi voluptatem nulla corrupti repellendus est laboriosam nobis officia?"
     },
     {
         "title": "Ipsam soluta quaerat voluptate.",
         "year": 2026,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "url": "#",
         "description": "Unde quae nam quam, quo et ut atque explicabo exercitationem labore ducimus libero similique neque fugiat est corrupti? Minima sapiente suscipit, aliquam maxime quidem voluptatibus esse quaerat laudantium ad explicabo?"
     },
     {
         "title": "Saepe nostrum voluptatum incidunt?",
         "year": 2027,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "url": "#",
         "description": "A reiciendis aliquam magnam neque nostrum necessitatibus ullam amet ipsam quas ipsum, facilis dolor accusantium vitae et provident ratione officia natus aut tempora velit porro nemo earum! Minima, quidem obcaecati."
     },
     {
         "title": "Quos minima exercitationem nulla.",
         "year": 2027,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "url": "#",
         "description": "Eos, dolore consectetur expedita possimus alias officia amet nulla quas eum sapiente corrupti fuga! Officia, incidunt? Odit natus libero aliquid dolore quod quasi vitae provident? Voluptates aut ab incidunt dignissimos?"
     },
     {
         "title": "Odit maiores blanditiis iste.",
         "year": 2028,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "url": "#",
         "description": "Totam sunt eos facere et unde praesentium tempore recusandae beatae. Unde quas consectetur odio aut nisi culpa quis? Explicabo vel vero laborum tempore exercitationem voluptas. Provident aliquid consequuntur repellendus deserunt."
     }
 ]

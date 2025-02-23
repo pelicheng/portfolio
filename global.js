@@ -141,7 +141,7 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
         article.innerHTML = `
         <h3>${project.title}</h3>
         <p class = "project-year">${project.year}</p>
-        <img src="${project.image}" alt="${project.title}">
+        <a href = ${project.url}><img src="${project.image}" alt="${project.title}"></a>
         <p>${project.description}</p>
         `;
 
