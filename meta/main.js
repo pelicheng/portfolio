@@ -431,14 +431,12 @@ let filteredCommits = [];
 // let fileTypeColors = d3.scaleOrdinal(d3.schemeSet2);
 let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
 
-// add new
-let NUM_ITEMS;// = 100; // Ideally, let this value be the length of your commit history
-let ITEM_HEIGHT = 100; // Feel free to change
-let VISIBLE_COUNT = 10; // Feel free to change as well
-let totalHeight; //= (NUM_ITEMS - 1) * ITEM_HEIGHT;
+let NUM_ITEMS;
+let ITEM_HEIGHT = 100;
+let VISIBLE_COUNT = 10; 
+let totalHeight; 
 const scrollContainer = d3.select('#scroll-container');
 const spacer = d3.select('#spacer');
-// spacer.style('height', `${totalHeight}px`);
 const itemsContainer = d3.select('#items-container');
 scrollContainer.on('scroll', () => {
   const scrollTop = scrollContainer.property('scrollTop');
@@ -446,14 +444,6 @@ scrollContainer.on('scroll', () => {
   startIndex = Math.max(0, Math.min(startIndex, commits.length - VISIBLE_COUNT));
   renderItems(startIndex);
 });
-
-let NUM_FILES;
-let ITEM_HEIGHT_FILES = 100;
-let VISIBLE_COUNT_FILES = 10;
-let totalHeightFiles;
-const filesScrollContainer = d3.select('#files-scroll-container');
-const filesSpacer = d3.select('#files-spacer');
-const filesItemsContainer = d3.select('#files-items-container');
 
 async function loadData() {
     data = await d3.csv('loc.csv', (row) => ({
@@ -510,21 +500,16 @@ function processCommits() {
 }
 
 function displayStats() {
-    // Process commits first
     processCommits();
 
-    // Create the dl element
     const dl = d3.select('#stats').append('dl').attr('class', 'stats');
 
-    // Add total LOC
     dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
     dl.append('dd').text(data.length);
 
-    // Add total commits
     dl.append('dt').text('Commits');
     dl.append('dd').text(commits.length);
 
-    // Add more stats as needed...
     const maxDepth = d3.max(data, (d) => d.depth);
     dl.append('dt').text('Max Depth');
     dl.append('dd').text(maxDepth);
@@ -640,7 +625,6 @@ function updateScatterplot(filteredCommits) {
             d3.select(event.currentTarget).classed('selected', false);
         });
 
-    // Enable brushing functionality
     brushSelector();
 }
 
@@ -756,7 +740,6 @@ function updateTooltipPosition(event) {
 function filterCommitsByTime() {
     filteredCommits = commits.filter(d => d.datetime <= commitMaxTime);
 
-    // add new
     let lines = filteredCommits.flatMap((d) => d.lines);
     let files = [];
     files = d3
@@ -799,20 +782,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 function displayFiles(files) {
-    // Step 1: Clear the existing file list
     d3.select('.files').selectAll('div').remove();
 
-    // Step 2: Bind the data to div elements and append them
     let filesContainer = d3.select('.files')
         .selectAll('div')
         .data(files)
         .enter()
         .append('div');
 
-    // Step 3: Append the <dt> and <dd> elements
     filesContainer.append('dt')
         .html(d => `<code>${d.name}</code><small>${d.lines.length} lines</small>`);
-        // .text(d => d.name); // Display the file name
 
     filesContainer.append('dd')
         .attr('class', 'unit-vis')
@@ -822,86 +801,20 @@ function displayFiles(files) {
         .append('div')
         .attr('class', 'line')
         .style('background', d => fileTypeColors(d.type));
-        // .text(d => `${d.lines.length} lines`);
 }
 
-// function renderItems(startIndex) {
-//     // Clear things off
-//     itemsContainer.selectAll('div').remove();
-//     const endIndex = Math.min(startIndex + VISIBLE_COUNT, commits.length);
-//     let newCommitSlice = commits.slice(startIndex, endIndex);
-    
-//     updateScatterplot(newCommitSlice);
-//     displayCommitFiles(newCommitSlice);
-
-//     itemsContainer.selectAll('div')
-//     .data(newCommitSlice)
-//     .enter()
-//     .append('div')
-//     .attr('class', 'item')
-//     .html((d, index) => `
-//       <p>
-//         On ${d.datetime.toLocaleString("en", { dateStyle: "full", timeStyle: "short" })}, I made
-//         <a href="${d.url}" target="_blank">
-//           ${index > 0 ? 'another glorious commit' : 'my first commit, and it was glorious'}
-//         </a>. I edited ${d.totalLines} lines across ${d3.rollups(d.lines, D => D.length, d => d.file).length} files.
-//       </p>
-//     `)
-//     .style('position', 'absolute')
-//     .style('top', (_, idx) => `${idx * ITEM_HEIGHT}px`);
-    
-// }
-
-// function renderItems(startIndex) {
-//     // Clear previous items
-//     itemsContainer.selectAll('div').remove();
-  
-//     // Calculate the end index for the visible slice of commits
-//     const endIndex = Math.min(startIndex + VISIBLE_COUNT, commits.length);
-//     let newCommitSlice = commits.slice(startIndex, endIndex);
-  
-//     // Update the scatterplot with the new slice of commits
-//     updateScatterplot(newCommitSlice);
-  
-//     // Update the file display with the new slice of commits
-//     displayCommitFiles(newCommitSlice);
-  
-//     // Bind the new slice of commits to the items container
-//     itemsContainer.selectAll('div')
-//       .data(newCommitSlice)
-//       .enter()
-//       .append('div')
-//       .attr('class', 'item')
-//       .html((d, index) => `
-//         <p>
-//           On ${d.datetime.toLocaleString("en", { dateStyle: "full", timeStyle: "short" })}, I made
-//           <a href="${d.url}" target="_blank">
-//             ${index > 0 ? 'another glorious commit' : 'my first commit, and it was glorious'}
-//           </a>. I edited ${d.totalLines} lines across ${d3.rollups(d.lines, D => D.length, d => d.file).length} files.
-//         </p>
-//       `)
-//       .style('position', 'absolute')
-//       .style('top', (_, idx) => `${(startIndex + idx) * ITEM_HEIGHT}px`); // Fix: Use startIndex + idx
-// }
-
 function renderItems(startIndex) {
-    // Clear previous items
     itemsContainer.selectAll('div').remove();
   
-    // Calculate the end index for the visible slice of commits
     const endIndex = Math.min(startIndex + VISIBLE_COUNT, commits.length);
     let newCommitSlice = commits.slice(startIndex, endIndex);
   
-    // Update filteredCommits with the new slice
     filteredCommits = newCommitSlice;
   
-    // Update the scatterplot with the new slice of commits
     updateScatterplot(filteredCommits);
   
-    // Update the file display with the new slice of commits
     displayCommitFiles(filteredCommits);
   
-    // Bind the new slice of commits to the items container
     itemsContainer.selectAll('div')
       .data(newCommitSlice)
       .enter()
@@ -916,12 +829,11 @@ function renderItems(startIndex) {
         </p>
       `)
       .style('position', 'absolute')
-      .style('top', (_, idx) => `${(startIndex + idx) * ITEM_HEIGHT}px`); // Fix: Use startIndex + idx
+      .style('top', (_, idx) => `${(startIndex + idx) * ITEM_HEIGHT}px`);
 }
 
 function displayCommitFiles(filteredCommits) {
     const lines = filteredCommits.flatMap((d) => d.lines);
-    // let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
     let files = d3.groups(lines, (d) => d.file).map(([name, lines]) => {
       return { name, lines };
     });
@@ -936,77 +848,4 @@ function displayCommitFiles(filteredCommits) {
                   .append('div')
                   .attr('class', 'line')
                   .style('background', d => fileTypeColors(d.type));
-}
-
-function initializeFileSizesScrolly() {
-    // Group data by file and calculate total lines per file
-    const files = d3.rollups(
-      data,
-      (v) => v.length, // Total lines per file
-      (d) => d.file
-    ).map(([name, lines]) => ({
-      name,
-      lines,
-    }));
-  
-    // Sort files by total lines (descending)
-    files.sort((a, b) => b.lines - a.lines);
-  
-    // Set NUM_ITEMS_FILES and totalHeightFiles
-    NUM_ITEMS_FILES = files.length;
-    totalHeightFiles = (NUM_ITEMS_FILES - 1) * ITEM_HEIGHT_FILES;
-    filesSpacer.style('height', `${totalHeightFiles}px`);
-  
-    // Add scroll event listener
-    filesScrollContainer.on('scroll', () => {
-      const scrollTop = filesScrollContainer.property('scrollTop');
-      let startIndex = Math.floor(scrollTop / ITEM_HEIGHT_FILES);
-      startIndex = Math.max(0, Math.min(startIndex, files.length - VISIBLE_COUNT_FILES));
-      renderFileItems(startIndex, files);
-    });
-  
-    // Render initial file items
-    renderFileItems(0, files);
-  }
-  
-  // Render file items and update the scatterplot
-function renderFileItems(startIndex, files) {
-    // Clear previous items
-    filesItemsContainer.selectAll('div').remove();
-  
-    // Calculate the end index for the visible slice of files
-    const endIndex = Math.min(startIndex + VISIBLE_COUNT_FILES, files.length);
-    let newFileSlice = files.slice(startIndex, endIndex);
-  
-    // Update the scatterplot to highlight commits related to the selected files
-    updateScatterplotForFiles(newFileSlice);
-  
-    // Bind the new slice of files to the items container
-    filesItemsContainer.selectAll('div')
-      .data(newFileSlice)
-      .enter()
-      .append('div')
-      .attr('class', 'file-item')
-      .html((d, index) => `
-        <p>
-          File: <code>${d.name}</code><br>
-          Total lines: ${d.lines}
-        </p>
-      `)
-      .style('position', 'absolute')
-      .style('top', (_, idx) => `${(startIndex + idx) * ITEM_HEIGHT_FILES}px`);
-}
-  
-  // Update the scatterplot to highlight commits related to the selected files
-function updateScatterplotForFiles(files) {
-    // Get the names of the selected files
-    const selectedFileNames = files.map(d => d.name);
-  
-    // Filter commits to include only those related to the selected files
-    const filteredCommits = commits.filter(commit =>
-      commit.lines.some(line => selectedFileNames.includes(line.file))
-    );
-  
-    // Update the scatterplot with the filtered commits
-    updateScatterplot(filteredCommits);
 }
