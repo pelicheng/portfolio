@@ -1,4 +1,3 @@
-/* @import url("colors.css"); */
 :root {
     --color-accent: oklch(83.79% 0.0518 234.93);
     color-scheme: light dark;
@@ -9,7 +8,6 @@
 }
 
 body {
-    /* Set line height to 1.5 times the font size and use the OS's UI font as the website font */
     font: 100%/1.5 system-ui;
     max-width: 100ch;
     margin-inline: auto;
@@ -315,7 +313,7 @@ circle:hover {
 circle.selected {
     fill: #3c8448;
 }
-/* eslint-disable-next-line */
+
 @starting-style {
     circle {
         r: 0;
@@ -342,19 +340,14 @@ circle.selected {
     grid-column: 2;
 }
 
-/* Style for each line (dot) */
 .line {
-    /* display: flex;
-    flex-wrap: wrap; */
     display: inline-block;
     width: 0.5em;
     aspect-ratio: 1;
-    background:  steelblue; /*circle colors, change later*/
     border-radius: 50%;
     margin: 0;
 }
 
-/* Style for the <dd> element */
 dd.unit-vis {
     grid-column: 2;
     display: flex;
@@ -362,12 +355,9 @@ dd.unit-vis {
     align-items: start;
     align-content: start;
     gap: 0.15em;
-    /* padding-top: 0.6em; */
     margin-left: 0;
-    /* border: 1px solid red; */
 }
 
-/* Style for the <small> element inside <dt> */
 dt small {
     display: block;
     font-size: 0.8em;
@@ -396,7 +386,7 @@ dt small {
     top: 0;
     left: 0;
     width: 100%;
-    background: none; /* transparent */
+    background: none; 
     pointer-events: none;
 }
   
@@ -409,55 +399,6 @@ dt small {
 
 .item {
     height: 100px;
-    padding: 10px;
-    box-sizing: border-box;
-    border-bottom: 2px solid #eee;
-}
-
-/* File sizes scrollytelling container */
-#scrollytelling-files {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal columns */
-    gap: 20px; /* Space between the unit visualization and scrolly */
-    align-items: start; /* Align items to the top */
-    margin-top: 40px; /* Add spacing between the two scrolly sections */
-}
-  
-  /* Unit visualization container (left) */
-#files-chart {
-    grid-column: 1; /* First column for the unit visualization */
-}
-  
-  /* Scroll container (right) */
-#files-scroll-container {
-    grid-column: 2; /* Second column for the scrolly */
-    height: 80vh; /* Set height to 80% of the viewport height */
-    overflow-y: scroll; /* Enable vertical scrolling */
-    border: 1px solid #ccc; /* Optional: Add a border */
-    padding: 10px; /* Optional: Add padding */
-}
-  
-  /* Spacer to create space for the narrative */
-#files-spacer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: none; /* Transparent */
-    pointer-events: none;
-}
-  
-  /* Container for the narrative steps */
-#files-items-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-  
-/* Individual file items */
-.file-item {
-    height: 100px; /* Adjust height to fit the narrative */
     padding: 10px;
     box-sizing: border-box;
     border-bottom: 2px solid #eee;
