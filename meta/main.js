@@ -447,14 +447,13 @@ scrollContainer.on('scroll', () => {
   renderItems(startIndex);
 });
 
-// let NUM_ITEMS_FILES; // Will be set to the number of files
-// let ITEM_HEIGHT_FILES = 100; // Height of each file item in pixels
-// let VISIBLE_COUNT_FILES = 10; // Number of visible file items at a time
-// let totalHeightFiles; // Total height of the scroll container for files
-// const filesScrollContainer = d3.select('#files-scroll-container');
-// const filesSpacer = d3.select('#files-spacer');
-// const filesItemsContainer = d3.select('#files-items-container');
-
+let NUM_FILES;
+let ITEM_HEIGHT_FILES = 100;
+let VISIBLE_COUNT_FILES = 10;
+let totalHeightFiles;
+const filesScrollContainer = d3.select('#files-scroll-container');
+const filesSpacer = d3.select('#files-spacer');
+const filesItemsContainer = d3.select('#files-items-container');
 
 async function loadData() {
     data = await d3.csv('loc.csv', (row) => ({
@@ -797,8 +796,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         filterCommitsByTime(); 
         updateScatterplot(filteredCommits); 
     });
-
-    // initializeFileSizesScrolly();
 });
 
 function displayFiles(files) {
@@ -922,22 +919,94 @@ function renderItems(startIndex) {
       .style('top', (_, idx) => `${(startIndex + idx) * ITEM_HEIGHT}px`); // Fix: Use startIndex + idx
 }
 
-// function displayCommitFiles(filteredCommits) {
-//     const lines = filteredCommits.flatMap((d) => d.lines);
-//     // let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
-//     let files = d3.groups(lines, (d) => d.file).map(([name, lines]) => {
-//       return { name, lines };
-//     });
-//     files = d3.sort(files, (d) => -d.lines.length);
-//     d3.select('.files').selectAll('div').remove();
-//     let filesContainer = d3.select('.files').selectAll('div').data(files).enter().append('div');
-//     filesContainer.append('dt').html(d => `<code>${d.name}</code><small>${d.lines.length} lines</small>`);
-//     filesContainer.append('dd')
-//                   .selectAll('div')
-//                   .data(d => d.lines)
-//                   .enter()
-//                   .append('div')
-//                   .attr('class', 'line')
-//                   .style('background', d => fileTypeColors(d.type));
-// }
+function displayCommitFiles(filteredCommits) {
+    const lines = filteredCommits.flatMap((d) => d.lines);
+    // let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
+    let files = d3.groups(lines, (d) => d.file).map(([name, lines]) => {
+      return { name, lines };
+    });
+    files = d3.sort(files, (d) => -d.lines.length);
+    d3.select('.files').selectAll('div').remove();
+    let filesContainer = d3.select('.files').selectAll('div').data(files).enter().append('div');
+    filesContainer.append('dt').html(d => `<code>${d.name}</code><small>${d.lines.length} lines</small>`);
+    filesContainer.append('dd')
+                  .selectAll('div')
+                  .data(d => d.lines)
+                  .enter()
+                  .append('div')
+                  .attr('class', 'line')
+                  .style('background', d => fileTypeColors(d.type));
+}
 
+function initializeFileSizesScrolly() {
+    // Group data by file and calculate total lines per file
+    const files = d3.rollups(
+      data,
+      (v) => v.length, // Total lines per file
+      (d) => d.file
+    ).map(([name, lines]) => ({
+      name,
+      lines,
+    }));
+  
+    // Sort files by total lines (descending)
+    files.sort((a, b) => b.lines - a.lines);
+  
+    // Set NUM_ITEMS_FILES and totalHeightFiles
+    NUM_ITEMS_FILES = files.length;
+    totalHeightFiles = (NUM_ITEMS_FILES - 1) * ITEM_HEIGHT_FILES;
+    filesSpacer.style('height', `${totalHeightFiles}px`);
+  
+    // Add scroll event listener
+    filesScrollContainer.on('scroll', () => {
+      const scrollTop = filesScrollContainer.property('scrollTop');
+      let startIndex = Math.floor(scrollTop / ITEM_HEIGHT_FILES);
+      startIndex = Math.max(0, Math.min(startIndex, files.length - VISIBLE_COUNT_FILES));
+      renderFileItems(startIndex, files);
+    });
+  
+    // Render initial file items
+    renderFileItems(0, files);
+  }
+  
+  // Render file items and update the scatterplot
+function renderFileItems(startIndex, files) {
+    // Clear previous items
+    filesItemsContainer.selectAll('div').remove();
+  
+    // Calculate the end index for the visible slice of files
+    const endIndex = Math.min(startIndex + VISIBLE_COUNT_FILES, files.length);
+    let newFileSlice = files.slice(startIndex, endIndex);
+  
+    // Update the scatterplot to highlight commits related to the selected files
+    updateScatterplotForFiles(newFileSlice);
+  
+    // Bind the new slice of files to the items container
+    filesItemsContainer.selectAll('div')
+      .data(newFileSlice)
+      .enter()
+      .append('div')
+      .attr('class', 'file-item')
+      .html((d, index) => `
+        <p>
+          File: <code>${d.name}</code><br>
+          Total lines: ${d.lines}
+        </p>
+      `)
+      .style('position', 'absolute')
+      .style('top', (_, idx) => `${(startIndex + idx) * ITEM_HEIGHT_FILES}px`);
+}
+  
+  // Update the scatterplot to highlight commits related to the selected files
+function updateScatterplotForFiles(files) {
+    // Get the names of the selected files
+    const selectedFileNames = files.map(d => d.name);
+  
+    // Filter commits to include only those related to the selected files
+    const filteredCommits = commits.filter(commit =>
+      commit.lines.some(line => selectedFileNames.includes(line.file))
+    );
+  
+    // Update the scatterplot with the filtered commits
+    updateScatterplot(filteredCommits);
+}
